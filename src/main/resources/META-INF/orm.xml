@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd">
+
+	<entity class="org.keycloak.events.jpa.AdminEventEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="authIpAddress" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="error" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="representation" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.AuthenticatorConfigEntity">
+		<attributes>
+			<element-collection name="config">
+				<column name="VALUE" />
+				<convert attribute-name="value"
+					converter="com.mazzo.keycloak.encryption.StringColumnConverter" />
+				<map-key-column name="NAME" />
+				<collection-table name="AUTHENTICATOR_CONFIG_ENTRY">
+					<join-column name="AUTHENTICATOR_ID" />
+					<unique-constraint>
+						<column-name>AUTHENTICATOR_ID</column-name>
+						<column-name>NAME</column-name>
+					</unique-constraint>
+				</collection-table>
+			</element-collection>
+		</attributes>
+	</entity>
+	<entity class="org.keycloak.storage.jpa.entity.BrokerLinkEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="brokerUserName" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="token" />
+	</entity>
+	<entity class="org.keycloak.models.jpa.entities.ClientEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="registrationToken" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="secret" />
+
+		<attributes>
+			<element-collection name="redirectUris">
+				<column name="VALUE" />
+				<convert
+					converter="com.mazzo.keycloak.encryption.StringColumnConverter" />
+				<collection-table name="REDIRECT_URIS">
+					<join-column name="CLIENT_ID" />
+				</collection-table>
+			</element-collection>
+			<element-collection name="webOrigins">
+				<column name="VALUE" />
+				<convert
+					converter="com.mazzo.keycloak.encryption.StringColumnConverter" />
+				<collection-table name="WEB_ORIGINS">
+					<join-column name="CLIENT_ID" />
+				</collection-table>
+			</element-collection>
+		</attributes>
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.ClientAttributeEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="value" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.ComponentConfigEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="value" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.CredentialEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="secretData" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="credentialData" />
+	</entity>
+	<entity class="org.keycloak.events.jpa.EventEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="sessionId" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="error" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="ipAddress" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="detailsJson" />
+	</entity>
+	<entity
+		class="org.keycloak.storage.jpa.entity.FederatedUserAttributeEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="value" />
+	</entity>
+	<entity
+		class="org.keycloak.storage.jpa.entity.FederatedUserCredentialEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="userLabel" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="credentialData" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="secretData" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.FederatedIdentityEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="userName" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="token" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.GroupAttributeEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="value" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.IdentityProviderEntity">
+		<attributes>
+			<element-collection name="config">
+				<column name="VALUE" column-definition="TEXT" />
+				<convert attribute-name="value"
+					converter="com.mazzo.keycloak.encryption.StringColumnConverter" />
+				<map-key-column name="NAME" />
+				<collection-table name="IDENTITY_PROVIDER_CONFIG">
+					<join-column name="IDENTITY_PROVIDER_ID" />
+				</collection-table>
+			</element-collection>
+		</attributes>
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.session.PersistentClientSessionEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="userSessionId" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="data" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.session.PersistentUserSessionEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="userSessionId" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="data" />
+	</entity>
+	<entity class="org.keycloak.models.jpa.entities.RealmEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="otpPolicyAlgorithm" />
+		<attributes>
+			<element-collection name="smtpConfig">
+				<column name="VALUE" />
+				<convert attribute-name="value"
+					converter="com.mazzo.keycloak.encryption.StringColumnConverter" />
+				<map-key-column name="NAME" />
+				<collection-table name="REALM_SMTP_CONFIG">
+					<join-column name="REALM_ID" />
+				</collection-table>
+			</element-collection>
+		</attributes>
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.RealmAttributeEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="value" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.RoleAttributeEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="value" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.UserAttributeEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="value" />
+	</entity>
+	<entity class="org.keycloak.models.jpa.entities.UserEntity">
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="email" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="emailConstraint" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="username" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="firstName" />
+		<convert
+			converter="com.mazzo.keycloak.encryption.StringColumnConverter"
+			attribute-name="lastName" />
+	</entity>
+	<entity
+		class="org.keycloak.models.jpa.entities.UserFederationProviderEntity">
+		<attributes>
+			<element-collection name="config">
+				<column name="VALUE" />
+				<convert attribute-name="value"
+					converter="com.mazzo.keycloak.encryption.StringColumnConverter" />
+				<map-key-column name="NAME" />
+				<collection-table name="USER_FEDERATION_CONFIG">
+					<join-column name="USER_FEDERATION_PROVIDER_ID" />
+				</collection-table>
+			</element-collection>
+		</attributes>
+	</entity>
+
+</entity-mappings>

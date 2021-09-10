@@ -1,0 +1,8 @@
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.1">
+    <deployment>
+        <dependencies>
+            <module name="org.hibernate" />
+            <module name="com.google.guava"></module>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
